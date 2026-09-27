@@ -275,6 +275,18 @@ public class MainActivity extends AppCompatActivity {
             // Activity9 is not exported → Noxen shows "Not exported" on getIntent()
             startActivity(new Intent(this, Activity9.class));
         });
+        setClickListener(R.id.btnAttackSurfaceDangerousPermissionReceiver, v -> {
+            // Target requires a dangerous-level permission → Noxen shows "(dangerous)"
+            Intent intent = new Intent();
+            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.DangerousPermissionReceiver");
+            sendBroadcast(intent);
+        });
+        setClickListener(R.id.btnAttackSurfaceUnresolvedPermissionReceiver, v -> {
+            // Target requires a permission no package defines → Noxen shows "(unresolved)"
+            Intent intent = new Intent();
+            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.UnresolvedPermissionReceiver");
+            sendBroadcast(intent);
+        });
         setClickListener(R.id.btnConcurrentBroadcasts2, v -> fireConcurrentBroadcasts(2));
         setClickListener(R.id.btnConcurrentBroadcasts5, v -> fireConcurrentBroadcasts(5));
 

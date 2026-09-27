@@ -6,7 +6,19 @@
         android:name="com.frankheat.noxen.playground.permission.MY_CUSTOM_PERMISSION"
         android:protectionLevel="normal" />
 
+    <permission
+        android:name="com.frankheat.noxen.playground.permission.SIGNATURE_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <permission
+        android:name="com.frankheat.noxen.playground.permission.DANGEROUS_PERMISSION"
+        android:protectionLevel="dangerous" />
+
     <uses-permission android:name="com.frankheat.noxen.playground.permission.MY_CUSTOM_PERMISSION" />
+    <uses-permission android:name="com.frankheat.noxen.playground.permission.SIGNATURE_PERMISSION" />
+    <uses-permission android:name="com.frankheat.noxen.playground.permission.DANGEROUS_PERMISSION" />
+    <!-- Intentionally not defined by any package: noxen shows it as "unresolved". -->
+    <uses-permission android:name="com.frankheat.noxen.playground.permission.UNDEFINED_PERMISSION" />
 
     <application
         android:allowBackup="true"
@@ -31,6 +43,37 @@
             android:name=".Receiver1"
             android:enabled="true"
             android:exported="true" />
+
+        <!-- Permission scenarios for the Info app tab (Access: weak / open). -->
+        <receiver
+            android:name=".DangerousPermissionReceiver"
+            android:exported="true"
+            android:permission="com.frankheat.noxen.playground.permission.DANGEROUS_PERMISSION" />
+        <receiver
+            android:name=".UnresolvedPermissionReceiver"
+            android:exported="true"
+            android:permission="com.frankheat.noxen.playground.permission.UNDEFINED_PERMISSION" />
+
+        <!-- android:permission on a provider sets both read and write (Access: protected). -->
+        <provider
+            android:name=".SignatureProvider"
+            android:authorities="com.frankheat.noxen.playground.signature"
+            android:exported="true"
+            android:permission="com.frankheat.noxen.playground.permission.SIGNATURE_PERMISSION" />
+
+        <!-- Split read/write plus a path-permission that opens /public reads (Access: open). -->
+        <provider
+            android:name=".SplitPermissionProvider"
+            android:authorities="com.frankheat.noxen.playground.split"
+            android:exported="true"
+            android:grantUriPermissions="false"
+            android:readPermission="com.frankheat.noxen.playground.permission.SIGNATURE_PERMISSION"
+            android:writePermission="com.frankheat.noxen.playground.permission.DANGEROUS_PERMISSION">
+            <path-permission
+                android:pathPrefix="/public"
+                android:readPermission="com.frankheat.noxen.playground.permission.MY_CUSTOM_PERMISSION" />
+            <grant-uri-permission android:pathPrefix="/shared" />
+        </provider>
 
         <activity
             android:name=".Activity9"
