@@ -171,9 +171,11 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         });
         setClickListener(R.id.btnStartForegroundService, v -> {
-            Intent intent = new Intent();
-            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Service1");
-            startForegroundService(intent);
+            if (android.os.Build.VERSION.SDK_INT >= 26) {
+                Intent intent = new Intent();
+                intent.setClassName("dev.noxen.playground", "dev.noxen.playground.ForegroundService1");
+                startForegroundService(intent);
+            }
         });
         setClickListener(R.id.btnBindService, v -> {
             Intent intent = new Intent();
@@ -291,6 +293,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnConcurrentBroadcasts5, v -> fireConcurrentBroadcasts(5));
 
         int api = android.os.Build.VERSION.SDK_INT;
+        disableViewsIfUnsupported(api, 26, R.id.btnStartForegroundService);
         disableViewsIfUnsupported(api, 29, R.id.btnBindServiceWithExecutorApi29);
         disableViewsIfUnsupported(
                 api,

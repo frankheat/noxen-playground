@@ -17,6 +17,9 @@
     <uses-permission android:name="dev.noxen.playground.permission.MY_CUSTOM_PERMISSION" />
     <uses-permission android:name="dev.noxen.playground.permission.SIGNATURE_PERMISSION" />
     <uses-permission android:name="dev.noxen.playground.permission.DANGEROUS_PERMISSION" />
+    <!-- Needed by ForegroundService1 (startForegroundService scenario). -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <!-- Intentionally not defined by any package: noxen shows it as "unresolved". -->
     <uses-permission android:name="dev.noxen.playground.permission.UNDEFINED_PERMISSION" />
 
@@ -34,6 +37,15 @@
             android:name=".Service1"
             android:enabled="true"
             android:exported="true" />
+        <!-- Target of startForegroundService(): calls startForeground() to avoid an ANR. -->
+        <service
+            android:name=".ForegroundService1"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="noxen playground startForegroundService test scenario" />
+        </service>
         <receiver
             android:name=".Receiver2"
             android:enabled="true"
