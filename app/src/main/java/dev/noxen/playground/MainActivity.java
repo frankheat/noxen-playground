@@ -1,5 +1,6 @@
 package dev.noxen.playground;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
            intent.putExtra("test", "test");
            intent.addCategory(Intent.CATEGORY_DEFAULT);
-           intent.addFlags(1);
+           intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
            sendBroadcast(intent);
         });
         setClickListener(R.id.btnSendBroadcastWithPermission, v -> {
@@ -93,18 +94,8 @@ public class MainActivity extends AppCompatActivity {
             intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver2");
             sendBroadcast(intent, "dev.noxen.playground.permission.MY_CUSTOM_PERMISSION");
         });
-        setClickListener(R.id.btnDynamicReceiverBroadcast, v -> {
-            Intent intent = new Intent();
-            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity6");
-            startActivity(intent);
-
-            new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
-                Intent intent2 = new Intent(Activity6.DYNAMIC_RECEIVER_ACTION);
-                intent2.putExtra("message", "Hello from MainActivity!");
-                sendBroadcast(intent2);
-            }, 3000);
-
-        });
+        setClickListener(R.id.btnDynamicReceiverBroadcast, v -> sendToDynamicReceiver(false));
+        setClickListener(R.id.btnDynamicReceiverBroadcastScoped, v -> sendToDynamicReceiver(true));
         setClickListener(R.id.btnSendOrderedBroadcast, v -> {
             Intent intent = new Intent();
             intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
@@ -338,6 +329,29 @@ public class MainActivity extends AppCompatActivity {
                 sendBroadcast(intent);
             }).start();
         }
+    }
+
+    /**
+     * Opens Activity6 (which registers a non-exported dynamic receiver) and, 3 s later,
+     * sends it an implicit broadcast. Without setPackage() the broadcast is deliberately
+     * left open: any installed app registered for the action would receive it too
+     * (the data-leak case noxen shows as "IMPLICIT (any app)"). With setPackage() it
+     * reaches only this app ("IMPLICIT (package-scoped)").
+     */
+    @SuppressLint("UnsafeImplicitIntentLaunch")  // the open broadcast is the scenario under test
+    private void sendToDynamicReceiver(boolean packageScoped) {
+        Intent intent = new Intent();
+        intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity6");
+        startActivity(intent);
+
+        new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
+            Intent intent2 = new Intent(Activity6.DYNAMIC_RECEIVER_ACTION);
+            intent2.putExtra("message", "Hello from MainActivity!");
+            if (packageScoped) {
+                intent2.setPackage(getPackageName());
+            }
+            sendBroadcast(intent2);
+        }, 3000);
     }
 
     private void setClickListener(int viewId, View.OnClickListener listener) {
