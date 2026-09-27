@@ -30,7 +30,7 @@ noxen
 ```
 
 From the Home tab, select the device, choose **Spawn** mode, and select package
-`com.frankheat.noxen.playground`. If the app is already running, use **Attach
+`dev.noxen.playground`. If the app is already running, use **Attach
 (app name)** with `noxen playground`.
 
 ## Android Studio
@@ -44,7 +44,7 @@ noxen-playground/
 ## App identity
 
 - App label: `noxen playground`
-- Package: `com.frankheat.noxen.playground`
+- Package: `dev.noxen.playground`
 
 ## License
 

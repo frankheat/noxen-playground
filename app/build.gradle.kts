@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    namespace = "com.frankheat.noxen.playground"
+    namespace = "dev.noxen.playground"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.frankheat.noxen.playground"
+        applicationId = "dev.noxen.playground"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

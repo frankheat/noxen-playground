@@ -1,4 +1,4 @@
-package com.frankheat.noxen.playground;
+package dev.noxen.playground;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.frankheat.noxen.playground", appContext.getPackageName());
+        assertEquals("dev.noxen.playground", appContext.getPackageName());
     }
 }

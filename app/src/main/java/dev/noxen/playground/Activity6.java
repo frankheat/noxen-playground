@@ -1,4 +1,4 @@
-package com.frankheat.noxen.playground;
+package dev.noxen.playground;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class Activity6 extends AppCompatActivity {
 
     public static final String DYNAMIC_RECEIVER_ACTION =
-            "com.frankheat.noxen.playground.action.DYNAMIC_RECEIVER_TEST";
+            "dev.noxen.playground.action.DYNAMIC_RECEIVER_TEST";
 
     private BroadcastReceiver dynamicReceiver;
 

@@ -1,4 +1,4 @@
-package com.frankheat.noxen.playground;
+package dev.noxen.playground;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

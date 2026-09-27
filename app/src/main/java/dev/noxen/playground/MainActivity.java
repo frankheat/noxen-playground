@@ -1,4 +1,4 @@
-package com.frankheat.noxen.playground;
+package dev.noxen.playground;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         });
         setClickListener(R.id.btnStartActivityWithExtras, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Activity1");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity1");
 
             Bundle nestedBundle = new Bundle();
             nestedBundle.putString("bundle_key", "Inside a bundle");
@@ -60,29 +60,29 @@ public class MainActivity extends AppCompatActivity {
         });
         setClickListener(R.id.btnStartActivityForResultWithOptions, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Activity2");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity2");
             startActivityForResult(intent, 100, null);
         });
         setClickListener(R.id.btnStartActivityForResultCallback, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Activity4");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity4");
             startActivityForResult(intent, 100);
         });
         setClickListener(R.id.btnStartActivitySingleTaskTwice, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Activity5");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity5");
             intent.putExtra("Number", "First");
             startActivity(intent);
             new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
                 Intent intent2 = new Intent();
-                intent2.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Activity5");
+                intent2.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity5");
                 intent2.putExtra("Number", "Second");
                 startActivity(intent2);
             }, 3000);
         });
         setClickListener(R.id.btnSendBroadcast, v -> {
            Intent intent = new Intent();
-           intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver1");
+           intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
            intent.putExtra("test", "test");
            intent.addCategory(Intent.CATEGORY_DEFAULT);
            intent.addFlags(1);
@@ -90,12 +90,12 @@ public class MainActivity extends AppCompatActivity {
         });
         setClickListener(R.id.btnSendBroadcastWithPermission, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver2");
-            sendBroadcast(intent, "com.frankheat.noxen.playground.permission.MY_CUSTOM_PERMISSION");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver2");
+            sendBroadcast(intent, "dev.noxen.playground.permission.MY_CUSTOM_PERMISSION");
         });
         setClickListener(R.id.btnDynamicReceiverBroadcast, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Activity6");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity6");
             startActivity(intent);
 
             new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
@@ -107,12 +107,12 @@ public class MainActivity extends AppCompatActivity {
         });
         setClickListener(R.id.btnSendOrderedBroadcast, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver1");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
             sendOrderedBroadcast(intent, null);
         });
         setClickListener(R.id.btnSendOrderedBroadcastWithResultReceiver, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver1");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
             sendOrderedBroadcast(intent, null, new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnSendOrderedBroadcastWithReceiverPermissionApi30, v -> {
             if (android.os.Build.VERSION.SDK_INT >= 30) {
                 Intent intent = new Intent();
-                intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver1");
+                intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
                 sendOrderedBroadcast(intent, (String) null, (String) null, new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context context, Intent intent) {
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnSendOrderedBroadcastWithFlagsApi30, v -> {
             if (android.os.Build.VERSION.SDK_INT >= 30) {
                 Intent intent = new Intent();
-                intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver1");
+                intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
                 sendOrderedBroadcast(intent, 0, null, null, new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context context, Intent intent) {
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnSendOrderedBroadcastWithOptionsApi34, v -> {
             if (android.os.Build.VERSION.SDK_INT >= 34) {
                 Intent intent = new Intent();
-                intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver1");
+                intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
                 Bundle options = new Bundle();
                 sendOrderedBroadcast(intent, null, options);
             }
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnSendOrderedBroadcastWithOptionsAndReceiverApi34, v -> {
             if (android.os.Build.VERSION.SDK_INT >= 34) {
                 Intent intent = new Intent();
-                intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver1");
+                intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
                 Bundle options = new Bundle();
                 sendOrderedBroadcast(intent, null, options, new BroadcastReceiver() {
                     @Override
@@ -167,17 +167,17 @@ public class MainActivity extends AppCompatActivity {
         });
         setClickListener(R.id.btnStartService, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Service1");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Service1");
             startService(intent);
         });
         setClickListener(R.id.btnStartForegroundService, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Service1");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Service1");
             startForegroundService(intent);
         });
         setClickListener(R.id.btnBindService, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Service1");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Service1");
             bindService(intent, new android.content.ServiceConnection() {
                 @Override public void onServiceConnected(android.content.ComponentName n, android.os.IBinder s) {}
                 @Override public void onServiceDisconnected(android.content.ComponentName n) {}
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnBindServiceWithExecutorApi29, v -> {
             if (android.os.Build.VERSION.SDK_INT >= 29) {
                 Intent intent = new Intent();
-                intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Service1");
+                intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Service1");
                 bindService(intent, BIND_AUTO_CREATE, getMainExecutor(), new android.content.ServiceConnection() {
                     @Override public void onServiceConnected(android.content.ComponentName n, android.os.IBinder s) {}
                     @Override public void onServiceDisconnected(android.content.ComponentName n) {}
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnBindServiceWithFlagsApi34, v -> {
             if (android.os.Build.VERSION.SDK_INT >= 34) {
                 Intent intent = new Intent();
-                intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Service1");
+                intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Service1");
                 bindService(intent, new android.content.ServiceConnection() {
                     @Override public void onServiceConnected(android.content.ComponentName n, android.os.IBinder s) {}
                     @Override public void onServiceDisconnected(android.content.ComponentName n) {}
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnBindServiceWithFlagsExecutorApi34, v -> {
             if (android.os.Build.VERSION.SDK_INT >= 34) {
                 Intent intent = new Intent();
-                intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Service1");
+                intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Service1");
                 bindService(intent, Context.BindServiceFlags.of(BIND_AUTO_CREATE), getMainExecutor(), new android.content.ServiceConnection() {
                     @Override public void onServiceConnected(android.content.ComponentName n, android.os.IBinder s) {}
                     @Override public void onServiceDisconnected(android.content.ComponentName n) {}
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnSendBroadcastWithOptionsApi34, v -> {
             if (android.os.Build.VERSION.SDK_INT >= 34) {
                 Intent intent = new Intent();
-                intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver1");
+                intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
                 intent.putExtra("test", "test");
                 Bundle options = new Bundle();
                 options.putInt("delivery_group_policy", 0);
@@ -225,18 +225,18 @@ public class MainActivity extends AppCompatActivity {
         });
         setClickListener(R.id.btnStartActivityForSetResult, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Activity7");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity7");
             startActivityForResult(intent, 100);
         });
         setClickListener(R.id.btnContextStartActivity, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Activity2");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity2");
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getApplicationContext().startActivity(intent);
         });
         setClickListener(R.id.btnContextStartActivityWithBundle, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Activity2");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity2");
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             Bundle bundle = new Bundle();
             bundle.putString("source", "ContextWrapper");
@@ -244,19 +244,19 @@ public class MainActivity extends AppCompatActivity {
         });
         setClickListener(R.id.btnPendingIntentActivity, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Activity2");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity2");
             intent.putExtra("pending_source", "getActivity");
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         });
         setClickListener(R.id.btnPendingIntentBroadcast, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver1");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
             intent.putExtra("pending_source", "getBroadcast");
             PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         });
         setClickListener(R.id.btnPendingIntentService, v -> {
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Service1");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Service1");
             intent.putExtra("pending_source", "getService");
             PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         });
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnAttackSurfaceImplicitExportedActivity, v -> {
             // Implicit intent: no ComponentName, resolved by Android → Noxen shows "Implicit"
             // Activity8 matches the filter and is exported → Noxen shows "Exported" on getIntent()
-            startActivity(new Intent("com.frankheat.noxen.playground.action.ATTACK_TEST"));
+            startActivity(new Intent("dev.noxen.playground.action.ATTACK_TEST"));
         });
         setClickListener(R.id.btnAttackSurfaceExplicitNotExportedActivity, v -> {
             // Explicit intent: ComponentName is set → Noxen shows "Explicit"
@@ -278,13 +278,13 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnAttackSurfaceDangerousPermissionReceiver, v -> {
             // Target requires a dangerous-level permission → Noxen shows "(dangerous)"
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.DangerousPermissionReceiver");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.DangerousPermissionReceiver");
             sendBroadcast(intent);
         });
         setClickListener(R.id.btnAttackSurfaceUnresolvedPermissionReceiver, v -> {
             // Target requires a permission no package defines → Noxen shows "(unresolved)"
             Intent intent = new Intent();
-            intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.UnresolvedPermissionReceiver");
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.UnresolvedPermissionReceiver");
             sendBroadcast(intent);
         });
         setClickListener(R.id.btnConcurrentBroadcasts2, v -> fireConcurrentBroadcasts(2));
@@ -329,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 Intent intent = new Intent();
-                intent.setClassName("com.frankheat.noxen.playground", "com.frankheat.noxen.playground.Receiver1");
+                intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
                 intent.putExtra("concurrent_index", index);
                 intent.putExtra("concurrent_total", count);
                 sendBroadcast(intent);
