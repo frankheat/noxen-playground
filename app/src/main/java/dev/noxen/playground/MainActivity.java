@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 
 import androidx.activity.EdgeToEdge;
@@ -38,22 +40,38 @@ public class MainActivity extends AppCompatActivity {
 
             Bundle nestedBundle = new Bundle();
             nestedBundle.putString("bundle_key", "Inside a bundle");
+            nestedBundle.putStringArray("bundle_tags", new String[]{"one", "two"});
+
+            ArrayList<Integer> bundleCounts = new ArrayList<>();
+            bundleCounts.add(3);
+            bundleCounts.add(5);
+            nestedBundle.putIntegerArrayList("bundle_counts", bundleCounts);
+
+            HashMap<String, String> serializableMap = new HashMap<>();
+            serializableMap.put("opaque_key", "opaque_value");
 
             Intent nestedIntent = new Intent();
+            nestedIntent.setAction("dev.noxen.playground.NESTED");
             nestedIntent.putExtra("a", "a");
+
+            Intent deeplyNestedIntent = new Intent();
+            deeplyNestedIntent.setAction("dev.noxen.playground.DEEPLY_NESTED");
+            deeplyNestedIntent.putExtra("depth", 2);
+            nestedIntent.putExtra("next", deeplyNestedIntent);
 
             intent.putExtra("intent", nestedIntent);
             intent.putExtra("my_parcelable", Uri.parse("https://android.com"));      // Parcelable
             intent.putExtra("my_byte", (byte) 1);                  // byte
             intent.putExtra("my_charsequence", (CharSequence) "Hello"); // CharSequence
             intent.putExtra("my_int", 42);                         // int
+            intent.putExtra("my_int_array", new int[]{1, 2, 3});  // int[]
             intent.putExtra("my_bundle", nestedBundle);            // Bundle
             intent.putExtra("my_double", 3.14159);                 // double
             intent.putExtra("my_boolean", true);                   // boolean
             intent.putExtra("my_string", "test string");           // String
             intent.putExtra("my_long", 100L);                      // long
             intent.putExtra("my_char", 'A');                       // char
-            //intent.putExtra("my_serializable", serializableMap);   // Serializable
+            intent.putExtra("my_serializable", serializableMap);  // unsupported Serializable
             intent.putExtra("my_float", 1.2f);                     // float
             intent.putExtra("my_short", (short) 5);                // short
 
