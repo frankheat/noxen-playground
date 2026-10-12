@@ -253,6 +253,35 @@ public class MainActivity extends AppCompatActivity {
             bundle.putString("source", "ContextWrapper");
             getApplicationContext().startActivity(intent, bundle);
         });
+        setClickListener(R.id.btnSelectorActive, v -> {
+            Intent intent = new Intent("dev.noxen.playground.SELECTOR_ACTIVE_PAYLOAD");
+            intent.putExtra("selector_case", "active");
+
+            Intent selector = new Intent("dev.noxen.playground.SELECTOR_ACTIVE_ROUTE");
+            selector.setClass(this, Activity1.class);
+            intent.setSelector(selector);
+            startActivity(intent);
+        });
+        setClickListener(R.id.btnSelectorIgnored, v -> {
+            Intent intent = new Intent("dev.noxen.playground.SELECTOR_IGNORED_PAYLOAD");
+            intent.setClass(this, Activity1.class);
+            intent.putExtra("selector_case", "ignored");
+
+            Intent selector = new Intent("dev.noxen.playground.SELECTOR_IGNORED_ROUTE");
+            selector.setClass(this, Activity2.class);
+            intent.setSelector(selector);
+            startActivity(intent);
+        });
+        setClickListener(R.id.btnSelectorRedundant, v -> {
+            Intent intent = new Intent("dev.noxen.playground.SELECTOR_REDUNDANT_PAYLOAD");
+            intent.setClass(this, Activity1.class);
+            intent.putExtra("selector_case", "redundant");
+
+            Intent selector = new Intent("dev.noxen.playground.SELECTOR_REDUNDANT_ROUTE");
+            selector.setClass(this, Activity1.class);
+            intent.setSelector(selector);
+            startActivity(intent);
+        });
         setClickListener(R.id.btnPendingIntentActivity, v -> {
             Intent intent = new Intent();
             intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Activity2");
