@@ -3,6 +3,7 @@ package dev.noxen.playground;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -280,6 +281,28 @@ public class MainActivity extends AppCompatActivity {
             Intent selector = new Intent("dev.noxen.playground.SELECTOR_REDUNDANT_ROUTE");
             selector.setClass(this, Activity1.class);
             intent.setSelector(selector);
+            startActivity(intent);
+        });
+        setClickListener(R.id.btnClipDataUris, v -> {
+            Intent intent = new Intent("dev.noxen.playground.CLIP_URI");
+            intent.setClass(this, Activity1.class);
+            ClipData clip = ClipData.newRawUri("shared documents",
+                    Uri.parse("content://dev.noxen.playground.split/shared/report-1"));
+            clip.addItem(new ClipData.Item(
+                    Uri.parse("content://dev.noxen.playground.split/shared/report-2")));
+            intent.setClipData(clip);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(intent);
+        });
+        setClickListener(R.id.btnClipDataNested, v -> {
+            Intent nested = new Intent("dev.noxen.playground.CLIP_NESTED");
+            nested.putExtra("nested_key", "inside ClipData");
+            nested.setClipData(ClipData.newPlainText("inner clip", "inner text"));
+
+            Intent intent = new Intent("dev.noxen.playground.CLIP_COMPLEX");
+            intent.setClass(this, Activity1.class);
+            intent.setClipData(new ClipData("mixed clip", new String[]{"text/html"},
+                    new ClipData.Item("visible text", "<b>visible text</b>", nested, null)));
             startActivity(intent);
         });
         setClickListener(R.id.btnPendingIntentActivity, v -> {
