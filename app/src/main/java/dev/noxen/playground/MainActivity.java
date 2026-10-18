@@ -108,10 +108,23 @@ public class MainActivity extends AppCompatActivity {
            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
            sendBroadcast(intent);
         });
+        setClickListener(R.id.btnSendBroadcastProtectedReceiver, v -> {
+            Intent intent = new Intent();
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver2");
+            intent.putExtra("permission_case", "protected_receiver");
+            sendBroadcast(intent);
+        });
+        setClickListener(R.id.btnSendBroadcastReceiverPermission, v -> {
+            Intent intent = new Intent();
+            intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver1");
+            intent.putExtra("permission_case", "receiver_permission");
+            sendBroadcast(intent, "dev.noxen.playground.permission.RECEIVE_BROADCAST");
+        });
         setClickListener(R.id.btnSendBroadcastWithPermission, v -> {
             Intent intent = new Intent();
             intent.setClassName("dev.noxen.playground", "dev.noxen.playground.Receiver2");
-            sendBroadcast(intent, "dev.noxen.playground.permission.MY_CUSTOM_PERMISSION");
+            intent.putExtra("permission_case", "both_permissions");
+            sendBroadcast(intent, "dev.noxen.playground.permission.RECEIVE_BROADCAST");
         });
         setClickListener(R.id.btnDynamicReceiverBroadcast, v -> sendToDynamicReceiver(false));
         setClickListener(R.id.btnDynamicReceiverBroadcastScoped, v -> sendToDynamicReceiver(true));

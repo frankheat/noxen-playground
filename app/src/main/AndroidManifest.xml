@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <permission
+        android:name="dev.noxen.playground.permission.SEND_TO_RECEIVER"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="dev.noxen.playground.permission.RECEIVE_BROADCAST"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="dev.noxen.playground.permission.SEND_TO_RECEIVER" />
+    <uses-permission android:name="dev.noxen.playground.permission.RECEIVE_BROADCAST" />
+
+    <permission
         android:name="dev.noxen.playground.permission.MY_CUSTOM_PERMISSION"
         android:protectionLevel="normal" />
 
@@ -50,7 +59,7 @@
             android:name=".Receiver2"
             android:enabled="true"
             android:exported="true"
-            android:permission="dev.noxen.playground.permission.MY_CUSTOM_PERMISSION" />
+            android:permission="dev.noxen.playground.permission.SEND_TO_RECEIVER" />
         <receiver
             android:name=".Receiver1"
             android:enabled="true"

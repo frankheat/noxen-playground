@@ -325,6 +325,44 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btnSendBroadcastProtectedReceiver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/white"
+            android:clickable="true"
+            android:elevation="2dp"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Broadcast: protected receiver (sender needs SEND_TO_RECEIVER)"
+                android:textColor="#212121"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnSendBroadcastReceiverPermission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/white"
+            android:clickable="true"
+            android:elevation="2dp"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Broadcast: receiver permission (recipient needs RECEIVE_BROADCAST)"
+                android:textColor="#212121"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btnSendBroadcastWithPermission"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -338,7 +376,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="sendBroadcast(Intent, String) + onReceive()"
+                android:text="Broadcast: both permissions (sender + recipient)"
                 android:textColor="#212121"
                 android:textSize="16sp" />
         </LinearLayout>

@@ -10,6 +10,13 @@ surfaces:
 
 - Activity launch and result flows
 - BroadcastReceiver and ordered broadcast flows
+- Three separate broadcast permission examples: protected receiver, recipient
+  permission, and both constraints. `Receiver2` requires senders to hold
+  `dev.noxen.playground.permission.SEND_TO_RECEIVER`; the permission argument passed
+  to `sendBroadcast` requires recipients to hold
+  `dev.noxen.playground.permission.RECEIVE_BROADCAST`. Both are signature permissions
+  declared and requested by the playground. These same-app examples demonstrate
+  configuration and capture, not rejection of unauthorized external apps.
 - Service and bindService flows
 - PendingIntent creation paths
 - Concurrent broadcasts from multiple threads
