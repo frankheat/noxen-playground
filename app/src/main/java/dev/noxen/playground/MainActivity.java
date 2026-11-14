@@ -275,6 +275,18 @@ public class MainActivity extends AppCompatActivity {
             Intent wrapper = new Intent(this, Activity1.class);
             wrapper.setAction("dev.noxen.playground.FORWARD_NESTED");
             wrapper.putExtra("next", next);
+            Bundle payload = new Bundle();
+            payload.putParcelable("next", new Intent(next).putExtra("marker", "bundle payload"));
+            payload.putString("neighbor", "keep");
+            wrapper.putExtra("payload", payload);
+            Intent container = new Intent();
+            container.putExtra("next", new Intent(next).putExtra("marker", "intent payload"));
+            wrapper.putExtra("container", container);
+            ClipData clip = new ClipData("nested intents", new String[]{"text/vnd.android.intent", "text/plain"},
+                    new ClipData.Item(new Intent(next).putExtra("marker", "clip payload")));
+            clip.addItem(new ClipData.Item("keep this item"));
+            wrapper.setClipData(clip);
+            wrapper.setSelector(new Intent(this, Activity2.class).setAction("dev.noxen.playground.NESTED_SELECTOR"));
             startActivity(wrapper);
         });
         setClickListener(R.id.btnSelectorActive, v -> {
