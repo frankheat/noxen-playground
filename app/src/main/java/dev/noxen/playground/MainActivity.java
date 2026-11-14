@@ -267,6 +267,15 @@ public class MainActivity extends AppCompatActivity {
             bundle.putString("source", "ContextWrapper");
             getApplicationContext().startActivity(intent, bundle);
         });
+        setClickListener(R.id.btnNestedIntent, v -> {
+            Intent next = new Intent(this, Activity1.class);
+            next.setAction("dev.noxen.playground.NESTED_DESTINATION");
+            next.putExtra("marker", "nested payload");
+            Intent wrapper = new Intent(this, Activity1.class);
+            wrapper.setAction("dev.noxen.playground.FORWARD_NESTED");
+            wrapper.putExtra("next", next);
+            startActivity(wrapper);
+        });
         setClickListener(R.id.btnSelectorActive, v -> {
             Intent intent = new Intent("dev.noxen.playground.SELECTOR_ACTIVE_PAYLOAD");
             intent.putExtra("selector_case", "active");

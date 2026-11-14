@@ -23,8 +23,17 @@ public class Activity1 extends AppCompatActivity {
             return insets;
         });
 
+        Intent received = getIntent();
+        if (received != null && "dev.noxen.playground.FORWARD_NESTED".equals(received.getAction())) {
+            Intent next = received.getParcelableExtra("next");
+            if (next != null) {
+                startActivity(next);
+                finish();
+                return;
+            }
+        }
         TextView intentInfo = findViewById(R.id.intentInfo);
-        intentInfo.setText(dumpIntent(getIntent()));
+        intentInfo.setText(dumpIntent(received));
     }
 
     private String dumpIntent(Intent intent) {
