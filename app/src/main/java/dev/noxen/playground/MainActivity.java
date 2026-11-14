@@ -270,6 +270,7 @@ public class MainActivity extends AppCompatActivity {
         setClickListener(R.id.btnNestedIntent, v -> {
             Intent next = new Intent(this, Activity1.class);
             next.setAction("dev.noxen.playground.NESTED_DESTINATION");
+            next.setDataAndType(Uri.parse("https://example.com/original"), "text/plain");
             next.putExtra("marker", "nested payload");
             Intent wrapper = new Intent(this, Activity1.class);
             wrapper.setAction("dev.noxen.playground.FORWARD_NESTED");
