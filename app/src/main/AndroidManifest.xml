@@ -96,6 +96,12 @@
             <grant-uri-permission android:pathPrefix="/shared" />
         </provider>
 
+        <!-- No permissions: caller input reaches SQLite and files (Access: open). -->
+        <provider
+            android:name=".OpenProvider"
+            android:authorities="dev.noxen.playground.open"
+            android:exported="true" />
+
         <activity
             android:name=".Activity9"
             android:exported="false" />
