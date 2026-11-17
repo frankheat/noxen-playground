@@ -1,5 +1,6 @@
 package dev.noxen.playground;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -25,6 +26,11 @@ public class Activity8 extends AppCompatActivity {
 
         Intent intent = getIntent();
         TextView info = findViewById(R.id.intentInfo);
-        info.setText("Component: " + (intent.getComponent() != null ? intent.getComponent().toShortString() : "(none — implicit)"));
+        if (intent == null) {
+            info.setText("No Intent received");
+            return;
+        }
+        ComponentName component = intent.getComponent();
+        info.setText("Component: " + (component != null ? component.toShortString() : "(none — implicit)"));
     }
 }
